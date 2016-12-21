@@ -1,5 +1,5 @@
 
-NAME = nm
+NAME = ft_nm
 CC = gcc
 FLAGS = -Wall -Wextra -Werror -g
 CFLAGS = -Wall -Wextra -Werror -g
