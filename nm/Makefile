@@ -8,7 +8,9 @@ SRCS = main.c \
 	   nm.c \
 	   nm_error.c \
 	   parse_file.c \
-	   nm_magic_64.c
+	   nm_magic_64.c \
+	   get_sections.c \
+	   nm_sym.c
 
 INCLUDES = -I ../libft/includes/
 LIBS = -L ../libft/ -lft

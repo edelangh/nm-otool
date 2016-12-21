@@ -6,7 +6,7 @@
 /*   By: edelangh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 14:32:14 by edelangh          #+#    #+#             */
-/*   Updated: 2016/12/21 16:51:54 by edelangh         ###   ########.fr       */
+/*   Updated: 2016/12/21 18:06:32 by edelangh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,32 @@
 #include <mach-o/fat.h>
 #include <ar.h>
 #define SARFMAG (sizeof(ARFMAG) - 1)
+
+static unsigned int swap_byte(unsigned int n)
+{
+	n = ((n << 8) & 0xFF00FF00) | ((n >> 8) & 0x00FF00FF);
+	return (n << 16) | (n >> 16);
+}
+
+static int	nm_fat(const char *data)
+{
+	struct fat_header	*fat;
+	struct fat_arch		*arch;
+	unsigned int		n;
+	unsigned int		offset;
+
+	fat = (struct fat_header*)data;
+	n = swap_byte(fat->nfat_arch);
+	arch = (struct fat_arch*)(data + sizeof(struct fat_header*));
+	while (n)
+	{
+		if (swap_byte(arch->cputype) == CPU_TYPE_X86_64)
+			offset = arch->offset;
+		++arch;
+		--n;
+	}
+	return (parse_file(data + swap_byte(offset), NULL));
+}
 
 static int	nm_display_ranlib(
 		struct ranlib *ran,
