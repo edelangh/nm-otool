@@ -1,3 +1,8 @@
+
+# Binary
+ft_nm
+ft_otool
+
 # Object files
 *.o
 *.ko

@@ -1,0 +1,26 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CC	Makefile	/^CC = gcc$/;"	m	language:Make
+CFLAGS	Makefile	/^CFLAGS = -Wall -Wextra -Werror -g$/;"	m	language:Make
+FLAGS	Makefile	/^FLAGS = -Wall -Wextra -Werror -g$/;"	m	language:Make
+INCLUDES	Makefile	/^INCLUDES = -I ..\/libft\/includes\/$/;"	m	language:Make
+LIBS	Makefile	/^LIBS = -L ..\/libft\/ -lft$/;"	m	language:Make
+NAME	Makefile	/^NAME = nm$/;"	m	language:Make
+NM_H	nm.h	/^# define NM_H$/;"	d	language:C++
+OBJDIR	Makefile	/^OBJDIR = obj\/$/;"	m	language:Make
+OBJS	Makefile	/^OBJS = $(addprefix $(OBJDIR),$(subst .c,.o,$(SRCS)))$/;"	m	language:Make
+SARFMAG	parse_file.c	/^#define SARFMAG /;"	d	language:C	file:
+SRCS	Makefile	/^SRCS = main.c \\$/;"	m	language:Make
+main	main.c	/^int		main(int ac, char **av)$/;"	f	language:C
+nm	nm.c	/^int		nm(const char *path)$/;"	f	language:C
+nm_archive	parse_file.c	/^static int	nm_archive(const char *data, const char *file)$/;"	f	language:C	file:
+nm_display_ranlib	parse_file.c	/^static int	nm_display_ranlib($/;"	f	language:C	file:
+nm_error	nm_error.c	/^int	nm_error(const char *s, const char *arg)$/;"	f	language:C
+nm_fat	nm_magic_64.c	/^int	nm_fat(const char *data)$/;"	f	language:C
+nm_magic_64	nm_magic_64.c	/^int	nm_magic_64(const char *data)$/;"	f	language:C
+parse_file	parse_file.c	/^int			parse_file(const char *data, const char *file)$/;"	f	language:C
+t_stat	nm.h	/^typedef struct stat		t_stat;$/;"	t	language:C++	typeref:struct:stat
