@@ -6,7 +6,7 @@
 /*   By: edelangh <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 14:04:41 by edelangh          #+#    #+#             */
-/*   Updated: 2016/12/21 19:24:11 by edelangh         ###   ########.fr       */
+/*   Updated: 2016/12/28 14:35:31 by edelangh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,32 @@ typedef struct				s_lsection
 	t_section				*last;
 }							t_lsection;
 
-int		nm_error(const char *s, const char *arg);
+typedef struct				s_memlist
+{
+	size_t					value;
+	char					type;
+	char					*str;
+	struct s_memlist		*next;
+	struct s_memlist		*prev;
+}							t_memlist;
 
-int		nm(const char *path);
-int		parse_file(const char *data, const char *file);
+int			nm_error(const char *s, const char *arg);
 
-int		nm_magic_64(const char *data);
+int			nm(const char *path);
+int			parse_file(const char *data, const char *file);
 
-t_lsection		*get_sections(struct load_command *c, struct mach_header_64 *m);
+int			nm_magic_64(const char *data);
 
-	int		nm_sym(
-		struct symtab_command* command,
-		const char *data,
-		t_lsection *sections);
+t_lsection	*get_sections(struct load_command *c, struct mach_header_64 *m);
+
+int			nm_sym(
+	struct symtab_command* command,
+	const char *data,
+	t_lsection *sections);
+
+t_memlist	*add_elem(
+	t_memlist *elem,
+	struct nlist_64 list,
+	char *strtable,
+	t_lsection *sec);
 #endif

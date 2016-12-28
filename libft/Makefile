@@ -148,6 +148,7 @@ SRCS = ft_atoi.c \
 		tablen.c \
 		ft_lsttotab.c \
 		ft_close.c \
+		ft_lstclean.c \
 
 
 

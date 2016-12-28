@@ -1,8 +1,8 @@
 
 NAME = ft_nm
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -g
-CFLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 OBJDIR = obj/
 SRCS = main.c \
 	   nm.c \
@@ -10,16 +10,18 @@ SRCS = main.c \
 	   parse_file.c \
 	   nm_magic_64.c \
 	   get_sections.c \
-	   nm_sym.c
+	   nm_sym.c \
+	   add_elem.c
 
 INCLUDES = -I ../libft/includes/
 LIBS = -L ../libft/ -lft
 OBJS = $(addprefix $(OBJDIR),$(subst .c,.o,$(SRCS)))
+EXTRA_DEPS = ../libft/libft.a Makefile
 
-all: $(NAME) $(LIBS)
+all: $(LIBS) $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAG) -o $@ $(OBJS) $(LIBS)
+$(NAME): $(OBJS) $(EXTRA_DEPS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBS)
 
 $(LIBS):
 	@make -C ../libft/
@@ -27,7 +29,7 @@ $(LIBS):
 $(OBJS): | $(OBJDIR)
 
 $(OBJDIR)%.o : %.c $(HEADER)
-	$(CC) $(FLAG) -c $< -o $@ $(INCLUDES)
+	$(CC) $(FLAGS) -c $< -o $@ $(INCLUDES)
 
 $(OBJDIR):
 	@if [ ! -d "$(OBJDIR)" ]; then \

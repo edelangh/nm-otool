@@ -55,6 +55,9 @@ typedef struct		s_lst
 	struct s_list	*next;
 }					t_lst;
 
+int		ft_lstclean(t_list **alst, 
+					int (*f)(void*, void*), 
+					void (*del)(void*, size_t));
 # define INT_CMP &int_cmp
 # define STRING_CMP (int(*)(void*,void*))&ft_strcmp
 

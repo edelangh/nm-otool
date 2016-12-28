@@ -64,6 +64,24 @@ static int	nm_display_ranlib(
 	return (parse_file((char*)ar + sizeof(struct ar_hdr) + size, file));
 }
 
+void	del_ran(void *content, size_t size)
+{
+	(void)size;
+	free(content);
+}
+
+static void *g_data = NULL;
+
+int 	cmp_rans(struct ranlib *a, struct ranlib *b)
+{
+	struct ar_hdr *arch_a;
+	struct ar_hdr *arch_b;
+
+	arch_a = g_data + a->ran_off;
+	arch_b = g_data + b->ran_off;
+	return (ft_strcmp(arch_a->ar_name, arch_b->ar_name));
+}
+
 static int	nm_archive(const char *data, const char *file)
 {
 	struct ar_hdr		*ar;
@@ -72,6 +90,7 @@ static int	nm_archive(const char *data, const char *file)
 	unsigned int		count;
 	unsigned int		i;
 
+	t_list				*rans_lst = NULL;
 	i = 0;
 	ar = (struct ar_hdr*)(data + SARMAG);
 	size = ft_atoi(ft_strchr(ar->ar_name, '/') + 1);
@@ -81,9 +100,16 @@ static int	nm_archive(const char *data, const char *file)
 	count /= sizeof(struct ranlib);
 	while (i < count)
 	{
-		if (nm_display_ranlib(rans + i, data, file) != 0)
-			return (1);
+		ft_lstpush(&rans_lst, ft_lstnew(rans + i, sizeof(struct ranlib)));
 		++i;
+	}
+	g_data = (char*)data;
+	ft_lstclean(&rans_lst, (void*)&cmp_rans, &del_ran);
+	while (rans_lst)
+	{
+		if (nm_display_ranlib(rans_lst->content, data, file) != 0)
+			return (1);
+		rans_lst = rans_lst->next;
 	}
 	return (0);
 }

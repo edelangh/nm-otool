@@ -34,6 +34,7 @@ int	nm_magic_64(const char *data)
 		if (command->cmd == LC_SYMTAB)
 		{
 			nm_sym((struct symtab_command*)command, data, sections);
+			break ;
 		}
 		command = (struct load_command*)((char*)command + command->cmdsize);
 		++i;
